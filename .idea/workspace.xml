@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19bc62b9-24c7-44e1-86cc-77b583a41c29" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/FilterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FilterController.php" afterDir="false" />
-    </list>
+    <list default="true" id="19bc62b9-24c7-44e1-86cc-77b583a41c29" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,7 +207,7 @@
       <workItem from="1616740376984" duration="19428000" />
       <workItem from="1617000607177" duration="18334000" />
       <workItem from="1617084431024" duration="16976000" />
-      <workItem from="1617172509779" duration="6037000" />
+      <workItem from="1617172509779" duration="6637000" />
     </task>
     <servers />
   </component>
