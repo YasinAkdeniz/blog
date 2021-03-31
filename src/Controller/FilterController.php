@@ -27,7 +27,6 @@ class FilterController extends AbstractController
      */
     public function listAction(Request $request, EventDispatcherInterface $eventDispatcher){
         $event = new ResolveEvent($request);
-        echo "ssss";
         $eventDispatcher->dispatch($event, 'filter.build');
 
         return $this->render('filter.twig', [
