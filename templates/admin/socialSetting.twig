@@ -1,0 +1,55 @@
+{% extends 'admin/base.twig' %}
+
+
+{% block content %}
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-5">AYARLAR</h1><hr>
+            <div class="alert alert-primary" role="alert">
+                <h5>Sosyal Medya Ayarları</h5>
+                {% if message %}
+                    <small><b style='color:green;'>{{ message }}</b></small>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" action="" method="post">
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Facebook:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="facebook" value="{{ settings|value('facebook') }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Twitter:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="twitter" value="{{ settings|value('twitter') }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Youtube:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="youtube" value="{{ settings|value('youtube') }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Linkedin:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="linkedin" value="{{ settings|value('linkedin') }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Instagram:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="instagram" value="{{ settings|value('instagram') }}">
+                    </div>
+                </div>
+                <div class="form-group mt-4" align="right">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" name="sosyalayarayarkaydet" class="btn btn-success">Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

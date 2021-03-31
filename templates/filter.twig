@@ -1,0 +1,10 @@
+{% for subMenu in filter.subMenus %}
+<h5 class="card-header ">{{ subMenu.title }}</h5>
+<div class="card-body">
+    <div>
+        {%  for menuItem in subMenu.menuItems %}
+            <p><a class="dropdown-item" href="{{ menuItem.slug }}">{{ menuItem.title }}({{ menuItem.count }})</a></p>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}

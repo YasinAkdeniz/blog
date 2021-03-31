@@ -1,0 +1,39 @@
+{% extends 'admin/base.twig' %}
+
+
+{% block content %}
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-5">İçerik İşlemleri</h1><small>
+        </div>
+        <table class="table table-bordered mt-4" id="dataTable" width="100%" cellspacing="0" data-sort-name="id" data-sort-order="desc">
+            <div align="right" class="mb-3 mr-2">
+                <a href="/admin/blog/add"><button class="btn btn-success btn-sm" type="submit"><i class="fas fa-plus"></i>&nbsp;Yeni ekle</button></a>
+            </div>
+            <thead class="thead-dark">
+            <tr>
+                <th data-field="id" scope="col" width="63px">Blog ID</th>
+                <th scope="col" width="90px">Blog Başlık</th>
+                <th scope="col" >Blog İçerik</th>
+                <th scope="col" width="90px">Blog Güncelleme</th>
+                <th scope="col" width="110px">Blog Güncelleme</th>
+                <th scope="col" width="90px">Blog Yazar</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for blog in blogs %}
+            <tr>
+                <th class="text-center">{{ blog.id }}</th>
+                <td class="text-center">{{ blog.title }}</td>
+                <td class="text-center">{{ blog.body }}</td>
+                <td class="text-center"><a href="/admin/blog/update_content/{{ blog.id }}"><button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-pencil-alt"></i>&nbsp;Düzenle</button></a></td>
+                <td class="text-center"><a href="/admin/blog/delete/{{ blog.id }}"><button class="btn btn-danger btn-sm" style="width: 85px"  type="submit"><i class="fas fa-trash-alt"></i>&nbsp;Sil</button></a></td>
+                <td class="text-center "> {{ blog.user.name ~ ' ' ~ blog.user.lastname}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

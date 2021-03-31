@@ -1,0 +1,34 @@
+{% extends 'base.twig' %}
+
+
+
+{% block content %}
+    <div class="col-lg-8 mt-5">
+        <!-- Title -->
+        <h1 class="mt-4">{{ blog.title }}</h1>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <div class="d-flex justify-content-between">
+            <span class="text-uppercase"> Yazar: {{ blog.user.username }}</span><span
+                    class="text-uppercase">Tarih:  </span>
+        </div>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">
+            {{ blog.body | raw }}
+        <hr>
+
+        <!-- Comments Form -->
+
+
+    </div>
+{% endblock %}

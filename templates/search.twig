@@ -1,0 +1,59 @@
+{% extends 'base.twig' %}
+
+{% block description %}{{ ayar.ayarDescription }}{% endblock %}
+{% block author %}{{ ayar.ayarAuthor }}{% endblock %}
+{% block keywords %}{{ ayar.ayarKeyword }}{% endblock %}
+{% block title %}{{ ayar.ayarTitle }}{% endblock %}
+{% block face %}{{ ayar.ayarFacebook }}{% endblock %}
+{% block twitter %}{{ ayarTwitter }}{% endblock %}
+{% block youtube %}{{ ayar.ayarYoutube }}{% endblock %}
+{% block linkedin %}{{ ayar.ayarLinkedin }}{% endblock %}
+{% block instagram %}{{ ayar.ayarinstagram }}{% endblock %}
+
+{% block content %}
+    <!-- Blog Entries Column -->
+    <div class="col-md-8 mt-5">
+        <!-- Blog Post -->
+
+        {% if search %}
+            {% for blog in resultSearch %}
+            <div class="card mb-4">
+                <img class="card-img-top" src="../img/blog2.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title text-uppercase"><a class="text-decoration-none" href="/blog/{{ blog.id }}">{{ blog.title }}</a></h2>
+                    <p class="card-text">{{ blog.body | raw }}</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/blog/{{ blog.id }}" class="btn btn-primary">Devamını Oku&rarr;</a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted text-uppercase d-flex justify-content-between">
+                    <span>Yazar: {{ blog.user.username }}</span><span class="">Tarih: {{ blog.updatedAt|date('Y-m-d') }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if pagination.page>1 %}
+                    <li class='page-item'><a class='page-link' href="/blog?page={{ pagination.page - 1 }}">Önceki</a></li>
+                {% endif %}
+                {% set beforeIndex =  pagination.page - pagination.forLimit %}
+                {% set afterIndex =  pagination.page + pagination.forLimit + 1 %}
+                {% set totalPageCount = (pagination.totalBlogCount / pagination.rpp) | round %}
+                {%  for i in 1..afterIndex %}
+                    {%  if(i>0 and i<=totalPageCount) %}
+                        {% if i == pagination.page %}
+                            <li class='page-item active'><a class='page-link' href='/blog?page={{ i }}'>{{ i }}</a></li>
+                        {% else %}
+                            <li class='page-item'><a class='page-link' href="/blog?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {%if pagination.page != totalPageCount %}
+                    <li class='page-item'><a class='page-link' href="/blog?page={{ pagination.page + 1 }}">Sonraki</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+{%  for category in categories %}
+    <p><a class="dropdown-item" href="/blog_category/{{ category.slug }}">{{ category.name }}({{ category.blogCount }})</a></p>
+{% endfor %}
