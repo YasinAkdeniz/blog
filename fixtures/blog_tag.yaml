@@ -1,0 +1,29 @@
+App\Entity\BlogTag:
+  blog_tag_1:
+    title: "Popüler"
+    slug: "popular"
+
+  blog_tag_2:
+    title: "Yeni"
+    slug: "yeni"
+
+  blog_tag_3:
+    title: "Öne Çıkanlar"
+    slug: "onecikanlar"
+
+  blog_tag_4:
+    title: "Sevilen"
+    slug: "sevilen"
+
+  blog_tag_5:
+    title: "Deneme"
+    slug: "deneme"
+
+  blog_tag_6:
+    title: "Makale"
+    slug: "makale"
+
+  blog_tag_7:
+    title: "Seyahatname"
+    slug: "seyahatname"
+

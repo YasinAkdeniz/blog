@@ -1,0 +1,10 @@
+App\Entity\Blog:
+  blog_{1..100}:
+    title: <sentence()>
+    image: "6.jpg"
+    body: <text(200)>
+    user: "@user_1"
+    blogCategories: ["@blog_category_*"]
+    blogTags : ["@blog_tag_*"]
+    created_at: <dateTimeThisYear()>
+    update_at: <dateTimeThisYear()>

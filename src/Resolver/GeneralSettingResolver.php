@@ -78,6 +78,26 @@ class GeneralSettingResolver
         return $this->get('site_url');
     }
 
+    public function title()
+    {
+        return $this->get('title');
+    }
+
+    public function description()
+    {
+        return $this->get('description');
+    }
+
+    public function author()
+    {
+        return $this->get('author');
+    }
+
+    public function keyword()
+    {
+        return $this->get('keyword');
+    }
+
     public function getTwitter()
     {
         return $this->get('twitter');

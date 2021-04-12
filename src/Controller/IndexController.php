@@ -6,14 +6,11 @@ namespace App\Controller;
 
 use App\Entity\GeneralSetting;
 use App\Entity\Blog;
+use App\Entity\Messages;
 use App\Entity\User;
 use App\Repository\BlogRepository;
-use App\Resolver\GeneralSettingResolver;
-use App\Service\BlogService;
 use App\Service\Filter\Event\ResolveEvent;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -27,18 +24,20 @@ class IndexController extends AbstractController
      * @return Response
      */
 
-    public function listAction(BlogService $blogService, Request $request, EventDispatcherInterface $eventDispatcher)
+    public function listAction(Request $request, EventDispatcherInterface $eventDispatcher)
     {
-        $totalBlogCount = $blogService->getCountByCriteria($request->query->get('q'));
-        $paginations = [
-            'page' => (int) $request->query->get('page', BlogService::DEFAULT_PAGE),
-            'rpp' => (int) $request->query->get('rpp', BlogService::DEFAULT_RPP),
-        ];
+
+        $event = new ResolveEvent($request);
+        $eventDispatcher->dispatch($event, 'filter.build');
+
         return $this->render('list.twig', [
-            'total_blog_count' => $totalBlogCount,
-            'blogs' => $blogService->findBlogByCriterias($paginations, $request->query->get('q')),
+            'url_items' => $event->getUrlItems(),
+            'raw_url_items' => $event->getRawUrlItems(),
+            'total_blog_count' => $event->getCount(),
+            'blogs' => $event->getSlicedBlogs(),
             'settings' => $this->getSettings(),
         ]);
+
     }
     /**
      *@Route("/blog/{id}", name="blog", methods={"GET", "POST"})
@@ -51,6 +50,7 @@ class IndexController extends AbstractController
         $blog = $blogRepository->find($id);
         return $this->render('detail.twig', [
             'blog' => $blog,
+            'settings' => $this->getSettings(),
 
         ]);
     }
@@ -59,7 +59,9 @@ class IndexController extends AbstractController
          */
     public function viewContactAction()
     {
-        return $this->render('contact.twig');
+        return $this->render('contact.twig',[
+            'settings' =>$this->getSettings()
+            ]);
     }
 
 
@@ -71,38 +73,35 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     *@Route("/send-message", name="send_message", methods ={"GET","POST"})
+     * @return Response
+     */
+    public function sendMessage(Request $request)
+    {
+        if ($request->getMethod() === Request::METHOD_POST) {
+            $message = new Messages();
+
+            $message->setName($request->request->get('name'));
+            $message->setEmail($request->request->get('email'));
+            $message->setTitle($request->request->get('title'));
+            $message->setMessage($request->request->get('message'));
+
+
+
+            $this->getDoctrine()->getManager()->persist($message);
+            $this->getDoctrine()->getManager()->flush();
+        }
+            return $this->render('contact.twig', [
+                'settings' => $this->getSettings(),
+            ]);
+
+    }
+
 
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

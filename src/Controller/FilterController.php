@@ -41,12 +41,20 @@ class FilterController extends AbstractController
     {
         /** @var BlogRepository $blogRepository */
         $blogRepository = $this->getDoctrine()->getManager()->getRepository(Blog::class);
-
         return $this->render('list.twig', [
             'blogs' => $blogRepository->findByTagSlug($slug),
-            'settings' => $this->getSettings()
+            'settings' => $this->getSettings(),
+
 
         ]);
+
+    }
+        /**
+         *@Route("/blog_filter/{slug}", name="blog_filter", methods={"GET","POST"})
+         */
+    public function filterControl()
+    {
+
 
     }
 

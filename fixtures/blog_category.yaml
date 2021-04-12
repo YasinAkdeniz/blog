@@ -1,0 +1,69 @@
+App\Entity\BlogCategory:
+  blog_category_1:
+    name: "Genel"
+    slug: "genel"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_2:
+    name: "Yazılım"
+    slug: "yazilim"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_3:
+    name: "Para"
+    slug: "para"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+  blog_category_4:
+    name: "Eğitim"
+    slug: "egitim"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_5:
+    name: "Sanayi"
+    slug: "sanayi"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_6:
+    name: "Savaş"
+    slug: "savas"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_7:
+    name: "Oyun"
+    slug: "oyun"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_8:
+    name: "Turizm"
+    slug: "truzim"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_9:
+    name: "Araba"
+    slug: "Araba"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  blog_category_10:
+    name: "Spor"
+    slug: "spor"
+    status: "active"
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>

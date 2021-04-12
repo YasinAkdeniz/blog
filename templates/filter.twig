@@ -1,10 +1,21 @@
 {% for subMenu in filter.subMenus %}
 <h5 class="card-header ">{{ subMenu.title }}</h5>
-<div class="card-body">
-    <div>
+<div  class="card-body">
+    <div class="tags">
         {%  for menuItem in subMenu.menuItems %}
-            <p><a class="dropdown-item" href="{{ menuItem.slug }}">{{ menuItem.title }}({{ menuItem.count }})</a></p>
+            <label>
+                <input type="checkbox" rel="{{ menuItem.slug }}" onclick="filterUrl(this)" {% if menuItem.status == 'selected' %}checked{% endif %}/>
+                {{ menuItem.title }}({{ menuItem.count }})
+            </label>
         {% endfor %}
     </div>
 </div>
 {% endfor %}
+
+<script type="text/javascript">
+    function filterUrl(element) {
+        window.location.href = $(element).attr("rel");
+    }
+
+</script>
+

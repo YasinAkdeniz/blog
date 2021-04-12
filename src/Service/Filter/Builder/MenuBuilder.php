@@ -9,6 +9,7 @@ use App\Service\Filter\Event\ResolveEvent;
 use App\Service\Filter\Model\Menu\Menu;
 use App\Service\Filter\Model\Menu\MenuItem;
 use App\Service\Filter\Model\Menu\SubMenu;
+use phpDocumentor\Reflection\Type;
 
 /**
  * Class MenuBuilder
@@ -23,10 +24,11 @@ class MenuBuilder
     public function build(ResolveEvent $event)
     {
         $blogs = $event->getBlogs();
-        $categories = StrategyFactory::create('category')->run($blogs);
-        $tags = StrategyFactory::create('tag')->run($blogs);
+        $categories = StrategyFactory::create('category')->run($blogs, $event->getUrlItems(), $event->getRawUrlItems());
+        $tags = StrategyFactory::create('tag')->run($blogs, $event->getUrlItems(), $event->getRawUrlItems());
         $this->buildSubMenu($event->getMenu(), 'Kategoriler', $categories);
         $this->buildSubMenu($event->getMenu(), 'Etiketler', $tags);
+
     }
 
 
@@ -55,6 +57,7 @@ class MenuBuilder
             $menuItem->setTitle($item['name']);
             $menuItem->setSlug($item['slug']);
             $menuItem->setCount($item['count']);
+            $menuItem->setStatus($item['status']);
             $menuItems[] = $menuItem;
         }
         return $menuItems;

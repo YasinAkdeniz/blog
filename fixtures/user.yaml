@@ -1,0 +1,6 @@
+App\Entity\user:
+  user_1:
+    name: <name("tr")>
+    lastname: <lastname()>
+    email: <email()>
+    password: "1234567"

@@ -1,0 +1,67 @@
+{% extends 'admin/base.twig' %}
+
+
+{% block content %}
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-5">Mesajlar</h1><hr>
+            <div class="alert alert-primary" role="alert">
+                <h5>Mesajı Cevapla</h5>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" method="post">
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Mesaj ID</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="id" value="{{ message.id }}" disabled="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Mesaj Yazarı Adı:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" value="{{ message.name }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Mesaj Yazarı Email:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="email" value="{{ message.email }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Mesaj Başlık:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="email" value="RE: {{ message.title }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email"> Cevap Mesaj İçerik:</label>
+                    <div class="col-sm-10">
+                        <textarea class="ckediyor" id="body" name="body"></textarea>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    CKEDITOR.replace('body',
+                        {
+                            filebrowserBrowseUrl:'ckfinder/ckfinder.html',
+                            filebrowserImageBrowserUrl:'ckfinder/ckfinder.html?type=Images',
+                            filebrowserFlashBrowserUrl:'ckfinder/ckfinder.html?type=Flash',
+                            filebrowserUploadUrl:'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                            filebrowserImageUploadUrl:'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                            filebrowserFlashUploadUrl:'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+                            forcePasteAsPlainText:true
+                        });
+                </script>
+
+                    <div class="form-group mt-4" align="right">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" name="icerikduzenle" class="btn btn-success">Gönder</button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </main>
+
+{% endblock %}

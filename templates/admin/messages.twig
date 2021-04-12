@@ -1,0 +1,38 @@
+{% extends 'admin/base.twig' %}
+
+
+{% block content %}
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-5">Mesajlar</h1><small>
+        </div>
+        <table class="table table-bordered mt-4" id="dataTable" width="100%" cellspacing="0" data-sort-name="id" data-sort-order="desc">
+
+            <thead class="thead-dark">
+            <tr>
+                <th data-field="id" scope="col" width="63px">Message ID</th>
+                <th scope="col" >Adı</th>
+                <th scope="col" width="90px">Message Mail</th>
+                <th scope="col" >Mesaj Başlık</th>
+                <th scope="col" >Mesaj</th>
+                <th scope="col" >Sil</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for message in messages %}
+                <tr>
+                    <th class="text-center">{{ message.id }}</th>
+                    <td class="text-center">{{ message.name }}</td>
+                    <td class="text-center">{{ message.email }}</td>
+                    <td class="text-center">{{ message.title }}</td>
+                    <td class="text-center">İçeriğe ulaşmak için <a href="/admin/messages-detail/{{ message.id }}"><b class="text-dark">tıklayınız.</b></a></td>
+                    <td class="text-center"><a href="/messages/delete/{{ message.id }}"><button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i>&nbsp;Sil</button></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

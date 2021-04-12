@@ -10,6 +10,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Blog|null find($id, $lockMode = null, $lockVersion = null)
@@ -53,7 +54,7 @@ class BlogRepository extends ServiceEntityRepository
      * @param $length
      * @return int|mixed|string
      */
-    public function findByCriterias($searchValue, $offset, $length)
+    public function     findByCriterias($searchValue, $offset, $length)
     {
         $qb = $this->createQueryBuilder('b');
 
@@ -84,6 +85,7 @@ class BlogRepository extends ServiceEntityRepository
 
 
 
+
     /**
      * @param $slug
      * @param int $offset
@@ -106,6 +108,58 @@ class BlogRepository extends ServiceEntityRepository
         return $query->getResult();
 
     }
+
+    /**
+     * @param $urlItems
+     * @return int|mixed|string
+     */
+    public function findByUrlItems($urlItems)
+    {
+        $qb = $this->getQueryBuilderByUrlItems($urlItems);
+
+
+        $query = $qb
+            ->groupBy('b.id')
+            ->getQuery();
+
+        return $query->getResult();
+
+    }
+
+    /**
+     * @param $urlItems
+     * @return int|mixed|string
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getTotalCountOfByUrlItems($urlItems)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('COUNT(b)')
+            ->from(Blog::class, 'b');
+
+        if(isset($urlItems['categories']) && !empty($urlItems['categories'])){
+            $qb->innerJoin('b.blogCategories','bc')
+                ->andWhere(
+                    $qb->expr()->in('bc.slug', $urlItems['categories'])
+                );
+        }
+        if(isset($urlItems['tags']) && !empty($urlItems['tags'])){
+            $qb->innerJoin('b.blogTags','bt')
+                ->andWhere($qb->expr()->in('bt.slug', $urlItems['tags']));
+        }
+
+
+
+        $query = $qb
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+
+
 
 
     // /**
@@ -136,4 +190,32 @@ class BlogRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @param $urlItems
+     * @return array
+     */
+    public function getQueryBuilderByUrlItems($urlItems): QueryBuilder
+    {
+        /** @var QueryBuilder $qb */
+        $qb = $this->createQueryBuilder('b');
+        if (isset($urlItems['categories']) && !empty($urlItems['categories'])) {
+            $qb->innerJoin('b.blogCategories', 'bc')
+                ->andWhere($qb->expr()->in('bc.slug', $urlItems['categories']));
+        }
+
+        if (isset($urlItems['tags']) && !empty($urlItems['tags'])) {
+            $qb->innerJoin('b.blogTags', 'bt')
+                ->andWhere($qb->expr()->in('bt.slug', $urlItems['tags']));
+        }
+        if (isset($urlItems['search']) && !empty($urlItems['search'])) {
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('b.title', ':search'),
+                    $qb->expr()->like('b.body', ':search')
+                )
+            );
+            $qb->setParameter(':search', '%' . $urlItems['search'] . '%');
+        }
+        return $qb;
+    }
 }

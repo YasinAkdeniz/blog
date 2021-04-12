@@ -6,6 +6,7 @@ namespace App\Service\Filter\Event;
 
 use App\Service\Filter\Model\Menu\Menu;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Count;
 
 class ResolveEvent
 {
@@ -22,12 +23,27 @@ class ResolveEvent
     /**
      * @var array
      */
+    protected $rawUrlItems = [];
+
+    /**
+     * @var array
+     */
     protected $blogs = [];
+
+    /**
+     * @var array
+     */
+    protected $slicedBlogs = [];
+
+
+    /** @var int */
+    protected $count  = 0;
 
     /**
      * @var Menu
      */
     protected $menu;
+
 
     /**
      * ResolveEvent constructor.
@@ -74,6 +90,22 @@ class ResolveEvent
     /**
      * @return array
      */
+    public function getRawUrlItems(): array
+    {
+        return $this->rawUrlItems;
+    }
+
+    /**
+     * @param array $rawUrlItems
+     */
+    public function setRawUrlItems(array $rawUrlItems): void
+    {
+        $this->rawUrlItems = $rawUrlItems;
+    }
+
+    /**
+     * @return array
+     */
     public function getBlogs(): array
     {
         return $this->blogs;
@@ -85,6 +117,22 @@ class ResolveEvent
     public function setBlogs(array $blogs): void
     {
         $this->blogs = $blogs;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSlicedBlogs(): array
+    {
+        return $this->slicedBlogs;
+    }
+
+    /**
+     * @param array $slicedBlogs
+     */
+    public function setSlicedBlogs(array $slicedBlogs): void
+    {
+        $this->slicedBlogs = $slicedBlogs;
     }
 
     /**
@@ -102,4 +150,22 @@ class ResolveEvent
     {
         $this->menu = $menu;
     }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
+    /**
+     * @param int $count
+     */
+    public function setCount(int $count): void
+    {
+        $this->count = $count;
+    }
+
+
 }

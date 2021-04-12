@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+
+.blog-preview{
+    float: left;
+    padding: 5px;
+    width: 200px;
+    height: 180px;
+}

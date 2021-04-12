@@ -11,8 +11,11 @@
 
         <!-- Date/Time -->
         <div class="d-flex justify-content-between">
+            <img class="blog-preview" src="{{ asset('/assets/images/' ~ blog.image) }}">
             <span class="text-uppercase"> Yazar: {{ blog.user.username }}</span><span
-                    class="text-uppercase">Tarih:  </span>
+                    class="text-uppercase">Tarih: {{ blog.createdAt|date('Y-m-d') }}
+                </span>
+
         </div>
 
         <hr>
